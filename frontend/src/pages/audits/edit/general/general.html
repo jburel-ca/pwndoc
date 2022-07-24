@@ -69,13 +69,27 @@
                     v-model="audit.client"
                     :options="selectClients"
                     option-value="email"
-                    option-label="email"
-                    @input="setCompanyFromClient"
+                    :option-label="(item) => (item)? item.firstname+' '+item.lastname: 'undefined'"
                     clearable
+                    multiple
+                    use-chips
                     options-sanitize
                     outlined 
                     :readonly="frontEndAuditState !== AUDIT_VIEW_STATE.EDIT"
-                    />
+                    >
+                        <template v-slot:selected-item="scope">
+                            <q-chip
+                            dense
+                            :removable="frontEndAuditState === AUDIT_VIEW_STATE.EDIT"
+                            @remove="scope.removeAtIndex(scope.index)"
+                            :tabindex="scope.tabindex"
+                            color="blue-grey-5"
+                            text-color="white"
+                            >
+                                {{scope.opt.firstname}} {{scope.opt.lastname}}
+                            </q-chip>
+                        </template>
+                    </q-select>
                     <q-select 
                     v-if="$settings.reviews.enabled"
                     class="col-md-12 col-12"
