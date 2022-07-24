@@ -66,7 +66,7 @@ var AuditSchema = new Schema({
     date_end:           String,
     summary:            String,
     company:            {type: Schema.Types.ObjectId, ref: 'Company'},
-    client:             {type: Schema.Types.ObjectId, ref: 'Client'},
+    client:             [{type: Schema.Types.ObjectId, ref: 'Client'}],
     collaborators:      [{type: Schema.Types.ObjectId, ref: 'User'}],
     reviewers:          [{type: Schema.Types.ObjectId, ref: 'User'}],
     language:           {type: String, required: true},

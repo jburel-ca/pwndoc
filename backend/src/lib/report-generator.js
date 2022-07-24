@@ -358,6 +358,20 @@ async function prepAuditData(data, settings) {
         result.client.title = data.client.title || "undefined"
     }
 
+    result.clients = []
+    if (data.client) {
+        data.client.forEach(client => {
+            result.clients.push({
+                email: client.email || "undefined",
+                firstname: client.firstname || "undefined",
+                lastname: client.lastname || "undefined",
+                phone: client.phone || "undefined",
+                cell: client.cell || "undefined",
+                title: client.title || "undefined"
+            })
+        })
+    }
+
     result.collaborators = []
     data.collaborators.forEach(collab => {
         result.collaborators.push({
